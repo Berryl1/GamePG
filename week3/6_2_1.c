@@ -10,70 +10,65 @@ void gotoxy(int x, int y);
 
 int main(void)
 {
-    char *slide = "■";
-    char key;
-    int x = 1;
-    int y = 1;
-    int h_slide_length = 0; // 변수 초기화
-    int v_slide_length = 0; // 변수 초기화
-
-    printf("슬라이드바 표시\n\n");
-    printf("수평 슬라이드바의 길이(최대 70)를\n 입력하고 Enter>");
-    scanf("%d", &h_slide_length);
-    
-    printf("수직 슬라이드바의 길이(최대 19)를\n 입력하고 Enter>");
-    scanf("%d", &v_slide_length);
-
-    system("cls");
+   char *slide="■", key;
+   int x=1, y=1;
+   int h_slide_length, v_slide_length;
+   printf("슬라이드바 표시\n\n");
+   printf("수평 슬라이드바의 길이(최대 70)를 \n");
+   printf("입력하고 Enter>");
+   scanf("%d", &h_slide_length);
+   printf("수직 슬라이드바의 길이(최대 19)를 \n");
+   printf("입력하고 Enter>");
+   scanf("%d", &v_slide_length);
+   system("cls");
 
    do
    {
-       draw_vertical_slide(1, y, v_slide_length, slide);
-       draw_horizontal_slide(x,v_slide_length+3,h_slide_length*2+2 ,slide); // 길이에 곱하기 2 추가
-       key=getch();
-       move_arrow_key(key,&x,&y,h_slide_length,v_slide_length);
-   } while (key != 27);
-
+    draw_vertical_slide(1, y, v_slide_length, slide);
+    draw_horizontal_slide(x,v_slide_length+3,h_slide_length,slide);
+    key=getch();
+    move_arrow_key(key, &x, &y, h_slide_length, v_slide_length);
+   }while(key!=27);
    return 0;
 }
+
 void draw_rectangle(int c, int r)
 {
     int i, j;
     unsigned char a=0xa6;
     unsigned char b[7]; 
     for(i=1;i<7;i++)
-   	b[i]=0xa0+i;
+        b[i]=0xa0+i;
 
     printf("%c%c",a, b[3]);
-    for(i=0;i<c;i++)
-  	printf("%c%c", a, b[1]);
+    for(i=0;i<c*2 + 2;i++) // 가로 길이를 1 더 크게 수정
+        printf("%c%c", a, b[1]);
     printf("%c%c", a, b[4]);
     printf("\n");
     for(i=0;i<r;i++)
     {
-	printf("%c%c", a, b[2]);
-	for(j=0;j<c;j++)
-		printf("  ");
-	printf("%c%c",a, b[2]);
-	printf("\n");
+        printf("%c%c", a, b[2]);
+        for(j=0;j<=c;j++)
+            printf("  ");
+        printf("%c%c",a, b[2]);
+        printf("\n");
     }
     printf("%c%c", a, b[6]);
-    for(i=0;i<c;i++)
-	printf("%c%c", a, b[1]);
+    for(i=0;i<c*2 + 2;i++) // 가로 길이를 1 더 크게 수정
+        printf("%c%c", a, b[1]);
     printf("%c%c", a, b[5]);
     printf("\n");
 }
 
-
 void draw_horizontal_slide(int x, int y, int length, char *s)
 {
-	int real_length=length/2;
-	gotoxy(1, y);
-	draw_rectangle(real_length+1, 1);
-	gotoxy(x+2, y+1);
-	printf("%s", s);
-	gotoxy(real_length*2+2, y-1);
-	printf("%2d", x);
+   int real_length = length / 2;
+   gotoxy(1, y);
+   draw_rectangle(real_length + 1, 1);
+   gotoxy(x + 4, y + 1);
+   printf("%s", s);
+   gotoxy(real_length * 2 + 2, y - 1);
+   printf("%2d", x);
 }
 
 void draw_vertical_slide(int x, int y, int length, char *s)
