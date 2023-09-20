@@ -62,14 +62,14 @@ void draw_rectangle(int c, int r)
 
 void draw_horizontal_slide(int x, int y, int length, char *s)
 {
-   int real_length = length / 2;
    gotoxy(1, y);
-   draw_rectangle(real_length + 1, 1);
-   gotoxy(x + 4, y + 1);
+   draw_rectangle(length, 1);
+   gotoxy(x * 2 + 1, y + 1 );
    printf("%s", s);
-   gotoxy(real_length * 2 + 2, y - 1);
-   printf("%2d", x);
+   gotoxy((length + 3) * 2 , y - 1 );
+   printf("%2d" , x);
 }
+
 
 void draw_vertical_slide(int x, int y, int length, char *s)
 {
