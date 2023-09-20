@@ -12,7 +12,8 @@
 ![6_1_1](https://github.com/Berryl1/Testing/assets/117261796/73bda40c-eb3d-43f7-b18b-80a23097ce8f)
 
 ## 6_2_1 : 슬라이드 바의 길이와 높이를 입력받아 슬라이드 바 두 개(높이만, 길이만)를 출력, 그리고 화살표로 정사각형을 이동시 슬라이드 바의 정사각형 위치 출력
-![6_2_1](https://github.com/Berryl1/Testing/assets/117261796/55e91a9e-8f68-497b-9c92-31bcdc6b79ac)
+![6_2_1](https://github.com/Berryl1/Testing/assets/117261796/f57d846d-34b4-4f3a-9fab-80a66dace23c)
+
 
 
 ## 6_3_1 : 화살표를 사용해 미노를 움직이고 스페이스 바를 이용해 회전을 시키는 프로그램
