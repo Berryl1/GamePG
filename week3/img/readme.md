@@ -11,8 +11,9 @@
 ## 6_1_1 : 1 이상의 정수를 입력해 디지털 숫자로 출력
 ![6_1_1](https://github.com/Berryl1/Testing/assets/117261796/73bda40c-eb3d-43f7-b18b-80a23097ce8f)
 
-## 6_2_1 : 슬라이드 바의 길이와 높이를 입력받아 슬라이드 바 두 개(높이만, 길이만)를 출력
-![6_2_1](https://github.com/Berryl1/Testing/assets/117261796/7dc88ab7-3af2-4349-9d8a-18fa43198bf0)
+## 6_2_1 : 슬라이드 바의 길이와 높이를 입력받아 슬라이드 바 두 개(높이만, 길이만)를 출력, 그리고 화살표로 정사각형을 이동시 슬라이드 바의 정사각형 위치 출력
+![화면 캡처 2023-09-20 202756](https://github.com/Berryl1/Testing/assets/117261796/a85e18ff-94f8-4702-a28e-c18132fc7ad1)
+
 
 ## 6_3_1 : 화살표를 사용해 미노를 움직이고 스페이스 바를 이용해 회전을 시키는 프로그램
 ![6_3_1](https://github.com/Berryl1/Testing/assets/117261796/f8a1ee1c-5bf7-45d8-8d0f-2d07af507db3)
