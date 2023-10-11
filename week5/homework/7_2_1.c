@@ -2,7 +2,7 @@
 #include <time.h>
 #include <conio.h>
 #include <stdlib.h>
-#define MATRIX_SIZE 3
+#define MATRIX_SIZE 5
 #define MAX_NUMBER 5
 #define TIME_LIMIT 5
 
