@@ -267,7 +267,8 @@ void Infinity_game_control(int matrixSize, int* score)
 
     // 정답 숫자들을 찾아 배열에 저장
     int max_num = 0;
-    for (int i = 0; i < INFINITY_MAX_NUMBER; i++) {
+    int i, j;
+    for (i = 0; i < INFINITY_MAX_NUMBER; i++) {
         if (cnt[i] > max_num) {
             max_num = cnt[i];
             num_of_answers = 0;
@@ -292,7 +293,7 @@ void Infinity_game_control(int matrixSize, int* score)
     user = getch() - '0';
 
     // 모든 일치하는 숫자를 검사
-    for (int i = 0; i < num_of_answers; i++) {
+    for (i = 0; i < num_of_answers; i++) {
         if (user == answer[i]) { 	
 		    Beep((int)C4, 500);
 		    Beep((int)E4, 500);
@@ -301,7 +302,7 @@ void Infinity_game_control(int matrixSize, int* score)
             printf("\n================================\n");
             printf("입력한 숫자 : %d \n", user);
             printf("번호: ");
-            for (int j = 0; j < num_of_answers; j++) {
+            for (j = 0; j < num_of_answers; j++) {
                 printf("%d ", answer[j]);
             }
             printf("\n================================\n");
@@ -321,7 +322,7 @@ void Infinity_game_control(int matrixSize, int* score)
         printf("\n================================\n");
         printf("입력한 숫자 : %d \n", user);
         printf("번호: ");
-        for (int i = 0; i < num_of_answers; i++) {
+        for (i = 0; i < num_of_answers; i++) {
             printf("%d ", answer[i]);
         }
         printf("\n횟수 : %d\n", cnt[answer[0]]);
