@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Menu</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(to bottom, #2980b9, #6dd5fa);
+      }
+
+      .menu-container {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        opacity: 0;
+        animation: fade-in 1s ease-in-out forwards;
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        font-size: 60px;
+      }
+
+      button {
+        padding: 15px 30px;
+        font-size: 24px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:active {
+        background-color: #3e8e41;
+      }
+
+      canvas {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <audio src="mainBGM.mp3" loop id="backgroundAudio"></audio>
+  <body>
+    <div class="menu-container">
+      <h1>Dodge Game</h1>
+      <label for="squareColor">사각형 색깔 : </label>
+      <input type="color" id="squareColor" name="squareColor" value="#ff0000" />
+      <br />
+      <br />
+      <label for="bgColor">배경화면 색깔 : </label>
+      <input type="color" id="bgColor" name="bgColor" value="#ffffff" />
+      <br />
+      <br />
+      <button onclick="changeColor(); playSound()">색깔 변경</button>
+      <!-- 버튼 클릭 시 playSound() 함수 호출 -->
+      <br />
+      <br />
+      <button onclick="startGame()">게임 시작</button>
+    </div>
+
+    <canvas id="audioVisualizer"></canvas>
+    <script>
+      var audio = document.getElementById("backgroundAudio");
+      audio.volume = 0.1;
+      audio.play();
+      // 볼륨을 0.1로 설정
+      var canvas = document.getElementById("audioVisualizer");
+      var ctx = canvas.getContext("2d");
+
+      var audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
+      var audioSource = audioContext.createMediaElementSource(audio);
+      var analyser = audioContext.createAnalyser();
+      audioSource.connect(analyser);
+      audioSource.connect(audioContext.destination);
+
+      analyser.fftSize = 2048;
+      var bufferLength = analyser.frequencyBinCount;
+      var dataArray = new Uint8Array(bufferLength);
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        analyser.getByteFrequencyData(dataArray);
+
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius = canvas.height / 2 - 150;
+
+        var barWidth = (Math.PI * 2) / bufferLength;
+        var barHeight;
+        var angle = 0;
+
+        for (var i = 0; i < bufferLength; i++) {
+          barHeight = dataArray[i] * 2;
+
+          var x = centerX + Math.cos(angle) * (radius + barHeight);
+          var y = centerY + Math.sin(angle) * (radius + barHeight);
+
+          // 무지개 색상 설정
+          var rainbowColor = "hsl(" + angle * (180 / Math.PI) + ", 100%, 50%)";
+
+          ctx.fillStyle = rainbowColor;
+          ctx.beginPath();
+          ctx.arc(x, y, 10, 0, Math.PI * 2);
+          ctx.fill();
+
+          angle += barWidth;
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+
+      function changeColor() {
+        var squareColor = document.getElementById("squareColor").value;
+        var bgColor = document.getElementById("bgColor").value;
+        localStorage.setItem("squareColor", squareColor);
+        localStorage.setItem("bgColor", bgColor);
+        alert("색깔이 변경되었습니다!");
+      }
+
+      function startGame() {
+        window.location.href = "game.html";
+      }
+
+      function playSound() {
+        var audio = new Audio("button.mp3"); // button.mp3 파일 경로
+        audio.play();
+      }
+    </script>
+  </body>
+</html>
