@@ -12,6 +12,18 @@ public class BallController : MonoBehaviour
     public GameObject FinishUI;
     public ParticleSystem coinParticleSystem;
     public AudioSource coinSound;
+    private bool isPaused = false;
+    private bool isZMovementEnabled = true;
+
+    public void SetZMovement(bool enableZMovement)
+    {
+        isZMovementEnabled = enableZMovement;
+    }
+
+        public void SetIsPaused(bool paused)
+    {
+        isPaused = paused;
+    }
     void Update()
     {
         if (!isGameStarted && Input.GetKeyDown(KeyCode.W))
@@ -19,7 +31,7 @@ public class BallController : MonoBehaviour
             isGameStarted = true;
         }
 
-        if (isGameStarted)
+        if (isGameStarted && !isPaused && isZMovementEnabled)
         {
             float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -27,6 +39,9 @@ public class BallController : MonoBehaviour
             transform.Translate(movement * speed * Time.deltaTime);
         }
     }
+
+    
+
 
     // 충돌 처리
     private void OnTriggerEnter(Collider other)
